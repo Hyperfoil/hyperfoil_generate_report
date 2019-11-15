@@ -1,0 +1,22 @@
+---
+# install file for hyperfoil_generate_report
+- name: Create home directory
+  file: 
+    path: "{{ hyperfoil_generate_report_home }}"
+    state: directory
+- name: Download release
+  when: hyperfoil_distribution is undefined
+  get_url:
+    url: ""
+    dest: "{{ hyperfoil_dir }}/{{ hyperfoil_generate_report_home }}.zip"
+- name: Fetch release
+  get_url:
+    url: "{{ hyperfoil_download_url }}"
+    dest: "{{ hyperfoil_dir }}/{{ hyperfoil_generate_report_home }}.zip"
+- name: Unpack distribution
+  unarchive:
+    src: "{{ hyperfoil_dir }}/{{ hyperfoil_generate_report_home }}.zip"
+    dest: "{{ hyperfoil_generate_report_home }}"
+    remote_src: true
+    list_files: true
+  register: hyperfoil_unarchived

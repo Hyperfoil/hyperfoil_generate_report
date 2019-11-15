@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Jeremy Whiting
+  description: Hyperfoil report generator
+  company: Red Hat
+  license: Apache License, Version 2.0
+  min_ansible_version: 2.4
+  platforms:
+  - name: Fedora
+    versions:
+    - all
+  - name: EL
+    versions:
+    - all
+  galaxy_tags: []
+    hyperfoil
+    benchmark
+    results
+    microservice
