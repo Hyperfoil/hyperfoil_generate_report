@@ -1,22 +1,38 @@
 ---
-# install file for hyperfoil_generate_report
+# install file for hyperfoil_report
 - name: Create home directory
   file: 
-    path: "{{ hyperfoil_generate_report_home }}"
+    path: "{{ hyperfoil_dir }}/{{ hyperfoil_report_home }}"
     state: directory
+- name: Get release from Github
+  when: hyperfoil_report_distribution is undefined
+  block:
+    #- name: Get specific release
+     # when: hyperfoil_report_version is defined
+      #block:
+      - name: Fetch release with given tag
+        uri:
+          url: https://api.github.com/repos/Hyperfoil/report/releases?tag_name={{ hyperfoil_report_version }}
+        register: hyperfoil_report_release_list
+      - name: Set the download url
+        set_fact:
+          hyperfoil_report_download_url: "{{ hyperfoil_report_release_list.json | json_query('[0].assets[0].browser_download_url') }}"
+      - name: Set artifact file name
+        set_fact:
+          hyperfoil_report_artifact_name: "{{ hyperfoil_report_release_list.json | json_query('[0].assets[0].name') }}"
+    #- name: Get latest release
+    #  when:
+    #  block:
+    #    - name: Fetch the latest version
+    #      uri:
+    #        url: https://api.github.com/repos/Hyperfoil/report/releases/latest
+    #      register: hyperfoil_report_release
+    #    - name: Set the download url
+    #      set_fact:
+    #        hyperfoil_report_version: "{{ hyperfoil_report_release.json | json_query('tag_name') }}"
+    #        hyperfoil_report_download_url: "{{ hyperfoil_report_release.json | json_query('assets[0].browser_download_url') }}"
 - name: Download release
-  when: hyperfoil_distribution is undefined
   get_url:
-    url: ""
-    dest: "{{ hyperfoil_dir }}/{{ hyperfoil_generate_report_home }}.zip"
-- name: Fetch release
-  get_url:
-    url: "{{ hyperfoil_download_url }}"
-    dest: "{{ hyperfoil_dir }}/{{ hyperfoil_generate_report_home }}.zip"
-- name: Unpack distribution
-  unarchive:
-    src: "{{ hyperfoil_dir }}/{{ hyperfoil_generate_report_home }}.zip"
-    dest: "{{ hyperfoil_generate_report_home }}"
-    remote_src: true
-    list_files: true
-  register: hyperfoil_unarchived
+    url: "{{ hyperfoil_report_download_url }}"
+    dest: "{{ hyperfoil_dir }}/{{ hyperfoil_report_home }}"
+    use_proxy: yes

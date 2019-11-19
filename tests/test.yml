@@ -1,0 +1,17 @@
+# test the role using this command
+# $ cd hyperfoil_generate_report
+# $ ansible-playbook -i tests/inventory tests/test.yml
+
+- hosts: localhost
+  pre_tasks:
+    - name: Set the run id
+      set_fact:
+        test_runid: 500
+    - name: Prepare test directory structure
+      file: 
+        path: "/tmp/hyperfoil/workspace/run/{{ test_runid }}"
+        state: directory
+  roles:
+    - role: generate_report
+  vars:
+    test_runid: 500

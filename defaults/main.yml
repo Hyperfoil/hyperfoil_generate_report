@@ -2,7 +2,6 @@
 hyperfoil_controller_group: hyperfoil-controller
 hyperfoil_dir: /tmp/hyperfoil
 
-JRE_11_FOLDER: /usr/lib/jvm/jre-11-openjdk
-JRE_8_FOLDER: /usr/lib/jvm/jre-8-openjdk
+hyperfoil_report_version: 0.0.1-alpha1
 
-reporter_version: 0.0.1-rc1
+hyperfoil_report_home: "hyperfoil_report"

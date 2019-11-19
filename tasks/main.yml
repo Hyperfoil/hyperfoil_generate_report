@@ -2,10 +2,10 @@
 # tasks file for hyperfoil_generate_report
 - name: Set home directory for generate report tool
   set_fact:
-    hyperfoil_generate_report_home: "{{ hyperfoil_dir }}/hyperfoil_generate_report-{{ reporter_version }}"
+    hyperfoil_generate_report_home: "{{ hyperfoil_dir }}/hyperfoil_generate_report-{{ hyperfoil_report_version }}"
 - name: Check the tool exists
   stat:
-    path: "{{ hyperfoil_generate_report_home }}"
+    path: "{{ hyperfoil_dir }}/{{ hyperfoil_report_home }}"
   register: install_check
   tags: reporter
 - name: Install tool, if necessary
@@ -13,4 +13,4 @@
   when: "not install_check.stat.exists"
   tags: reporter
 - name: Run the tool
-  shell: "java -jar {{ hyperfoil_generate_report_home }}/target/report-{{ reporter_version }}-jar-with-dependencies.jar -s /tmp/hyperfoil/workspace/run/{{ test_runid }} -d /tmp/hyperfoil/workspace/run/{{ test_runid }}/index.html"
+  shell: "java -jar {{ hyperfoil_dir }}/{{ hyperfoil_report_home }}/report-{{ hyperfoil_report_version }}-jar-with-dependencies.jar -s /tmp/hyperfoil/workspace/run/{{ test_runid }} -d /tmp/hyperfoil/workspace/run/{{ test_runid }}/index.html"

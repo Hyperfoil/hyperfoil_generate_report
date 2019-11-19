@@ -11,8 +11,10 @@ galaxy_info:
   - name: EL
     versions:
     - all
-  galaxy_tags: []
+  galaxy_tags: [
     hyperfoil
     benchmark
     results
     microservice
+  ]
+    
