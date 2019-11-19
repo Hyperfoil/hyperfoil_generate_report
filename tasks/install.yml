@@ -35,4 +35,3 @@
   get_url:
     url: "{{ hyperfoil_report_download_url }}"
     dest: "{{ hyperfoil_dir }}/{{ hyperfoil_report_home }}"
-    use_proxy: yes
