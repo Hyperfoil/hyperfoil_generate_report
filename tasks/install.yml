@@ -2,7 +2,7 @@
 # install file for hyperfoil_report
 - name: Create home directory
   file: 
-    path: "{{ hyperfoil_dir }}/{{ hyperfoil_report_home }}"
+    path: "{{ hyperfoil_report_home }}"
     state: directory
 - name: Get release from Github
   when: hyperfoil_report_distribution is undefined
@@ -34,4 +34,4 @@
 - name: Download release
   get_url:
     url: "{{ hyperfoil_report_download_url }}"
-    dest: "{{ hyperfoil_dir }}/{{ hyperfoil_report_home }}"
+    dest: "{{ hyperfoil_report_home }}"
