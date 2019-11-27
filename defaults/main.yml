@@ -3,3 +3,5 @@ hyperfoil_controller_group: hyperfoil-controller
 hyperfoil_dir: /tmp/hyperfoil
 
 hyperfoil_report_version: 0.0.1-alpha1
+
+JDK_11_HOME: /usr/lib/jvm/jre-11-openjdk

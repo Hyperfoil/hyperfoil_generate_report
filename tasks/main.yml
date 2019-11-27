@@ -13,4 +13,4 @@
   when: "not install_check.stat.exists"
   tags: reporter
 - name: Run the tool
-  shell: "java -jar {{ hyperfoil_report_home }}/report-{{ hyperfoil_report_version }}-jar-with-dependencies.jar -s /tmp/hyperfoil/workspace/run/{{ test_runid }} -d /tmp/hyperfoil/workspace/run/{{ test_runid }}/index.html"
+  shell: "{{ JDK_11_HOME }}/bin/java -jar {{ hyperfoil_report_home }}/report-{{ hyperfoil_report_version }}-jar-with-dependencies.jar -s /tmp/hyperfoil/workspace/run/{{ test_runid }} -d /tmp/hyperfoil/workspace/run/{{ test_runid }}/index.html"
